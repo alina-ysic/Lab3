@@ -25,6 +25,6 @@ public class FlightApp {
                     return new Tuple2<>(s, 1l);
                 }
         );
-        wordsWithCount.foreach(System.out::println);
+        wordsWithCount.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
     }
 }
