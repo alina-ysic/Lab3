@@ -53,8 +53,6 @@ public class FlightApp {
         });
         //result.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
 
-
-
         JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
         airportFile = airportFile.filter((s) -> {
             String[] flightInfo = s.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
