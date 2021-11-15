@@ -22,10 +22,13 @@ public class FlightApp {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
         JavaRDD<String> airportFile = sc.textFile("664600583_T_ONTIME_sample.csv");
+        airportFile = airportFile.filter((s) -> {
+            String[] flightInfo = s.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
+            return !Objects.equals(flightInfo[0], "YEAR");
+        });
         JavaPairRDD<Tuple2, FlightSerializable> wordsWithCount = airportFile.mapToPair(
                 value -> {
                     String[] flightInfo = value.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
-                    if (Objects.equals(flightInfo[0], "YEAR")) return null;
                     int outAirportId = Integer.parseInt(flightInfo[OUT_CODE_POS]);
                     int inAirportId = Integer.parseInt(flightInfo[IN_CODE_POS]);
                     float delay = (flightInfo[DELAY_POS].isEmpty()) ? 0 : Float.parseFloat(flightInfo[DELAY_POS]);
