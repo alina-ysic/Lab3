@@ -21,12 +21,13 @@ public class FlightApp {
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
+        JavaRDD<String> flightFile = sc.textFile("664600583_T_ONTIME_sample.csv");
         JavaRDD<String> airportFile = sc.textFile("664600583_T_ONTIME_sample.csv");
-        airportFile = airportFile.filter((s) -> {
+        flightFile = flightFile.filter((s) -> {
             String[] flightInfo = s.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
             return !Objects.equals(flightInfo[0], "YEAR");
         });
-        JavaPairRDD<Tuple2, FlightsSerializable> airportsWithInfo = airportFile.mapToPair(
+        JavaPairRDD<Tuple2, FlightsSerializable> airportsWithInfo = flightFile.mapToPair(
                 value -> {
                     String[] flightInfo = value.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
                     int outAirportId = Integer.parseInt(flightInfo[OUT_CODE_POS]);
