@@ -69,14 +69,15 @@ public class FlightApp {
 
         final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportNames);
 
-        JavaRDD res = result.map(s -> {
-            String nameOutAirport = airportsBroadcasted.value().get(s._1);
-            String nameInAirport = airportsBroadcasted.value().get(s._2);
-            String info = "Аэропорт вылета: %s, аэропорт прилёта: %s, макс.задержка: %f, среднее задержанных: %f\\%, среднее отмененных: %f\\%"
-            return new Tuple2<Tuple2, FlightsSerializable>(new Tuple2(nameOutAirport, nameInAirport), s._2);
+        JavaRDD<String> res = result.map(s -> {
+            String nameOutAirport = airportsBroadcasted.value().get(s._1._1);
+            String nameInAirport = airportsBroadcasted.value().get(s._1._2);
+            String info = String.format("Аэропорт вылета: %s, аэропорт прилёта: %s, макс.задержка: %f, среднее задержанных: %f\\%, среднее отмененных: %f\\%",
+            nameOutAirport, nameInAirport, s._2.getDelay(), s._2.getLatePercent(), s._2.getCancelledPercent());
+            return info;
         });
 
-        res.foreach(t -> System.out.println(t);
+        res.foreach(System.out::println);
 
 
     }
