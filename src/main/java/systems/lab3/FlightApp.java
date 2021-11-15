@@ -6,15 +6,17 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
+import java.util.Arrays;
+
 public class FlightApp {
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
         JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
-        JavaRDD<String> splitted = airportFile.flatMap(Hadoop
-                s -> Arrays.stream(Hadoop s.split(Hadoop " ")).iterator(Hadoop )
+        JavaRDD<String> splitted = airportFile.flatMap(
+                s -> Arrays.stream(s.split(" ")).iterator()
         );
-        JavaPairRDD<String, Long> wordsWithCount = airportFile.mapToPair(
+        JavaPairRDD<String, Long> wordsWithCount = splitted.mapToPair(
                 s -> {
                     System.out.println("AAAAA");
                     System.out.println(s);
