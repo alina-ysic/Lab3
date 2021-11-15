@@ -15,12 +15,7 @@ public class FlightApp {
         JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
         System.out.println("AAAAA");
         JavaPairRDD<String, Long> wordsWithCount = airportFile.mapToPair(
-                s -> {
-                    //System.out.println("AAAAA");
-                    //System.out.println(s);
-
-                    return new Tuple2<>(s, 1l);
-                }
+                s -> new Tuple2<>(s, 1l)
         );
         wordsWithCount.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
     }
