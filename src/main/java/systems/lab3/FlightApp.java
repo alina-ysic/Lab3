@@ -67,6 +67,8 @@ public class FlightApp {
                     return new Tuple2(airportId, airportName);
                 }
         ).collectAsMap();
-        
+
+        final Broadcast<Map<String, AirportData>> airportsBroadcasted =
+                sc.broadcast(stringAirportDataMap);
     }
 }
