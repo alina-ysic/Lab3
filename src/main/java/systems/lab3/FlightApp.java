@@ -19,12 +19,12 @@ public class FlightApp {
         );*/
         JavaPairRDD<String, Long> wordsWithCount = airportFile.mapToPair(
                 s -> {
-                    System.out.println("AAAAA");
-                    System.out.println(s);
+                    //System.out.println("AAAAA");
+                    //System.out.println(s);
 
                     return new Tuple2<>(s, 1l);
                 }
         );
-        wordsWithCount.foreach();
+        wordsWithCount.foreach((System.out::println));
     }
 }
