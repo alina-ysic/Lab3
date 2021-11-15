@@ -77,7 +77,7 @@ public class FlightApp {
             return info;
         });
 
-        res.foreach(System.out::println);
+        res.foreach((s) -> System.out.println(s));
 
 
     }
