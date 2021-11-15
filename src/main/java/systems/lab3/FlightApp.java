@@ -77,6 +77,6 @@ public class FlightApp {
             return info;
         });
 
-        res.collect().foreach((s) -> System.out.println(s));
+        res.saveAsTextFile("output3.txt");
     }
 }
