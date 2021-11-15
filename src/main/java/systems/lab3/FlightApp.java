@@ -19,7 +19,7 @@ public class FlightApp {
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
-        JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
+        JavaRDD<String> airportFile = sc.textFile("664600583_T_ONTIME_sample.csv");
         JavaPairRDD<Tuple2, FlightSerializable> wordsWithCount = airportFile.mapToPair(
                 value -> {
                     String[] flightInfo = value.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
