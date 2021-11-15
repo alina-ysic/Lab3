@@ -22,7 +22,6 @@ public class FlightApp {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
         JavaRDD<String> flightFile = sc.textFile("664600583_T_ONTIME_sample.csv");
-        JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
 
         flightFile = flightFile.filter((s) -> {
             String[] flightInfo = s.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
@@ -46,6 +45,15 @@ public class FlightApp {
             float latePercent = (x.getLatePercent() * x.getCount() + y.getLatePercent() * y.getCount()) / count;
             return new FlightsSerializable(maxDelay, cancelledPercent, latePercent, count);
         });
-        result.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
+        //result.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
+
+
+
+        JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
+        airportFile.mapToPair(
+                value -> {
+
+                }
+        )
     }
 }
