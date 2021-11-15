@@ -5,8 +5,8 @@ import java.io.Serializable;
 
 public class FlightsSerializable implements Serializable {
     private float delay;
-    private float isLate;
-    private float isCancelled;
+    private float latePercent;
+    private float cancelledPercent;
 
     private int count;
 
@@ -15,11 +15,11 @@ public class FlightsSerializable implements Serializable {
     }
 
     public float isLate() {
-        return isLate;
+        return latePercent;
     }
 
     public float isCancelled() {
-        return isCancelled;
+        return cancelledPercent;
     }
 
     public int getCount() {
@@ -28,8 +28,8 @@ public class FlightsSerializable implements Serializable {
 
     public FlightsSerializable(float delay, float isCancelled, int count) {
         this.delay = delay;
-        isLate = (delay == 0) ? 0 : 1;
-        this.isCancelled = isCancelled;
+        latePercent = (delay == 0) ? 0 : 100;
+        this.cancelledPercent = isCancelled * 100;
         this.count = count;
     }
 
@@ -37,8 +37,8 @@ public class FlightsSerializable implements Serializable {
     public String toString() {
         return "FlightSerializable{" +
                 "delay=" + delay +
-                ", isLate=" + isLate +
-                ", isCancelled=" + isCancelled +
+                ", isLate=" + latePercent +
+                ", isCancelled=" + cancelledPercent +
                 '}';
     }
 }
