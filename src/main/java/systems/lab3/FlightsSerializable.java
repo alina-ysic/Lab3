@@ -10,15 +10,15 @@ public class FlightsSerializable implements Serializable {
 
     private int count;
 
-    public float getLateTime() {
+    public float getDelay() {
         return delay;
     }
 
-    public float isLate() {
+    public float getLatePercent() {
         return latePercent;
     }
 
-    public float isCancelled() {
+    public float getCancelledPercent() {
         return cancelledPercent;
     }
 
