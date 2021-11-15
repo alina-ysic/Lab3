@@ -7,6 +7,8 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
+import java.util.Objects;
+
 public class FlightApp {
 
     private static final String DELIMITER_COMMA = ",";
@@ -23,7 +25,7 @@ public class FlightApp {
         JavaPairRDD<Tuple2, FlightSerializable> wordsWithCount = airportFile.mapToPair(
                 value -> {
                     String[] flightInfo = value.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
-
+                    if (Objects.equals(flightInfo[0], "YEAR")) return null;
                     int outAirportId = Integer.parseInt(flightInfo[OUT_CODE_POS]);
                     int inAirportId = Integer.parseInt(flightInfo[IN_CODE_POS]);
                     float delay = Float.parseFloat(flightInfo[DELAY_POS]);
