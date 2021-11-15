@@ -7,6 +7,7 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class FlightApp {
@@ -57,14 +58,15 @@ public class FlightApp {
         airportFile = airportFile.filter((s) -> {
             String[] flightInfo = s.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
             return !Objects.equals(flightInfo[0], "Code");
-        })
-        airportFile.mapToPair(
+        });
+        Map airportNames = airportFile.mapToPair(
                 value -> {
                     String[] airportInfo = value.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
                     int airportId = Integer.parseInt(airportInfo[CODE_POS]);
                     String airportName = airportInfo[DESCRIPTION_POS];
                     return new Tuple2(airportId, airportName);
                 }
-        )
+        ).collectAsMap();
+        
     }
 }
