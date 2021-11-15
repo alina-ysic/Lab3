@@ -20,6 +20,8 @@ public class FlightApp {
                 s -> {
                     System.out.println("AAAAA");
                     System.out.println(s);
+                    s.saveAsTextFile("alicia.txt");
+
                     return new Tuple2<>(s, 1l);
                 }
         );
