@@ -67,6 +67,6 @@ public class FlightApp {
                     return new Tuple2(airportId, airportName);
                 }
         ).collectAsMap();
-        System.out.println(airportNames);
+        
     }
 }
