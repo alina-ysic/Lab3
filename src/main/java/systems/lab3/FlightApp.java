@@ -13,7 +13,7 @@ public class FlightApp {
 
     private static final String DELIMITER_COMMA = ",";
     private static final String DELIMITER_QUOTE = "\"";
-    
+
     private static final int OUT_CODE_POS = 11;
     private static final int IN_CODE_POS = 14;
     private static final int DELAY_POS = 18;
@@ -54,9 +54,16 @@ public class FlightApp {
 
 
         JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
+        airportFile = airportFile.filter((s) -> {
+            String[] flightInfo = s.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
+            return !Objects.equals(flightInfo[0], "");
+        })
         airportFile.mapToPair(
                 value -> {
-
+                    String[] airportInfo = value.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
+                    int airportId = Integer.parseInt(airportInfo[CODE_POS]);
+                    String airportName = airportInfo[DESCRIPTION_POS];
+                    return new Tuple2(airportId, airportName);
                 }
         )
     }
