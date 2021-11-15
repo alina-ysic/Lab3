@@ -26,10 +26,10 @@ public class FlightApp {
 
                     int outAirportId = Integer.parseInt(flightInfo[OUT_CODE_POS]);
                     int inAirportId = Integer.parseInt(flightInfo[IN_CODE_POS]);
-                    String delay = flightInfo[DELAY_POS];
+                    float delay = Float.parseFloat(flightInfo[DELAY_POS]);
                     boolean cancelled = Boolean.getBoolean(flightInfo[CANCELLED_POS]);
 
-                    return null;
+                    return new Tuple2<>(new Tuple2(outAirportId, inAirportId), new FlightSerializable(delay, cancelled));
                 }
         );
         wordsWithCount.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
