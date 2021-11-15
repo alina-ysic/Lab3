@@ -74,8 +74,8 @@ public class FlightApp {
             String nameInAirport = airportsBroadcasted.value().get(s._2);
             return new Tuple2<Tuple2, FlightsSerializable>(new Tuple2(nameOutAirport, nameInAirport), s._2);
         });
-
-
+        
+        res.foreach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
 
 
     }
