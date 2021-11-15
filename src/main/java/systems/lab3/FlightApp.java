@@ -13,10 +13,14 @@ public class FlightApp {
 
     private static final String DELIMITER_COMMA = ",";
     private static final String DELIMITER_QUOTE = "\"";
+    
     private static final int OUT_CODE_POS = 11;
     private static final int IN_CODE_POS = 14;
     private static final int DELAY_POS = 18;
     private static final int CANCELLED_POS = 19;
+
+    private static final int CODE_POS = 0;
+    private static final int DESCRIPTION_POS = 1;
 
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("lab3");
