@@ -13,7 +13,7 @@ public class FlightApp {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
         JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
-        
+        System.out.println("AAAAA");
         /*JavaRDD<String> splitted = airportFile.flatMap(
                 s -> Arrays.stream(s.split(" ")).iterator()
         );*/
