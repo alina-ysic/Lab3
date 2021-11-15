@@ -3,27 +3,34 @@ package systems.lab3;
 
 import java.io.Serializable;
 
-public class FlightSerializable implements Serializable {
+public class FlightsSerializable implements Serializable {
     private float delay;
-    private boolean isLate;
-    private boolean isCancelled;
+    private float isLate;
+    private float isCancelled;
+
+    private int count;
 
     public float getLateTime() {
         return delay;
     }
 
-    public boolean isLate() {
+    public float isLate() {
         return isLate;
     }
 
-    public boolean isCancelled() {
+    public float isCancelled() {
         return isCancelled;
     }
 
-    public FlightSerializable(float delay, boolean isCancelled) {
+    public int getCount() {
+        return count;
+    }
+
+    public FlightsSerializable(float delay, float isCancelled, int count) {
         this.delay = delay;
-        if (delay != 0) isLate = true;
+        isLate = (delay == 0) ? 0 : 1;
         this.isCancelled = isCancelled;
+        this.count = count;
     }
 
     @Override
