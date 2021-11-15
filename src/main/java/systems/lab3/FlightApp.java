@@ -11,8 +11,11 @@ public class FlightApp {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
         JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
-        JavaPairRDD<String, Long> wordsWithCount = splitted.mapToPair(
-                s -> new Tuple2<>(s, 1l)
+        JavaPairRDD<String, Long> wordsWithCount = airportFile.mapToPair(
+                s -> {
+                    System.out.println(s);
+                    return new Tuple2<>(s, 1l);
+                }
         );
     }
 }
