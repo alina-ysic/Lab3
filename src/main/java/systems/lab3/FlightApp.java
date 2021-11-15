@@ -11,6 +11,8 @@ public class FlightApp {
 
     private static final String DELIMITER_COMMA = ",";
     private static final String DELIMITER_QUOTE = "\"";
+    private static final int CODE_POS = 14;
+    private static final int DELAY_POS = 18;
 
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("lab3");
