@@ -7,5 +7,5 @@ import org.apache.spark.api.java.JavaSparkContext;
 public class FlightApp {
     SparkConf conf = new SparkConf().setAppName("lab3");
     JavaSparkContext sc = new JavaSparkContext(conf);
-    JavaRDD<String> distFile = sc.textFile("L_AIRPORT_ID.csv");
+    JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
 }
