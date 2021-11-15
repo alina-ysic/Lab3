@@ -11,8 +11,10 @@ public class FlightApp {
 
     private static final String DELIMITER_COMMA = ",";
     private static final String DELIMITER_QUOTE = "\"";
-    private static final int CODE_POS = 14;
+    private static final int OUT_CODE_POS = 11;
+    private static final int IN_CODE_POS = 14;
     private static final int DELAY_POS = 18;
+    private static final int CANCELLED_POS = 19;
 
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("lab3");
@@ -22,12 +24,10 @@ public class FlightApp {
                 value -> {
                     String[] flightInfo = value.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
 
-                    int airportId = Integer.parseInt(flightInfo[CODE_POS]);
+                    int outAirportId = Integer.parseInt(flightInfo[OUT_CODE_POS]);
+                    int inAirportId = Integer.parseInt(flightInfo[IN_CODE_POS]);
                     String delay = flightInfo[DELAY_POS];
-                    if (!delay.isEmpty() && Float.parseFloat(delay) != 0) {
-                        context.write(new AirportIdWritableComparable(airportId, INDICATOR), new Text(delay));
-                    }
-
+                    boolean cancelled = Boolean.getBoolean(flightInfo[CANCELLED_POS]);
 
                     return null;
                 }
