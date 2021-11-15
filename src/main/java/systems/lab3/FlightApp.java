@@ -11,6 +11,9 @@ public class FlightApp {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
         JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
+        JavaRDD<String> splitted = airportFile.flatMap(Hadoop
+                s -> Arrays.stream(Hadoop s.split(Hadoop " ")).iterator(Hadoop )
+        );
         JavaPairRDD<String, Long> wordsWithCount = airportFile.mapToPair(
                 s -> {
                     System.out.println("AAAAA");
