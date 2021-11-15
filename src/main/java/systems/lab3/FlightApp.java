@@ -5,6 +5,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.broadcast.Broadcast;
 import scala.Tuple2;
 
 import java.util.Map;
@@ -59,16 +60,15 @@ public class FlightApp {
             String[] flightInfo = s.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
             return !Objects.equals(flightInfo[0], "Code");
         });
-        Map airportNames = airportFile.mapToPair(
+        Map<Integer, String> airportNames = airportFile.mapToPair(
                 value -> {
                     String[] airportInfo = value.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
                     int airportId = Integer.parseInt(airportInfo[CODE_POS]);
                     String airportName = airportInfo[DESCRIPTION_POS];
-                    return new Tuple2(airportId, airportName);
+                    return new Tuple2<Integer, String>(airportId, airportName);
                 }
         ).collectAsMap();
 
-        final Broadcast<Map<String, AirportData>> airportsBroadcasted =
-                sc.broadcast(stringAirportDataMap);
+        final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportNames);
     }
 }
