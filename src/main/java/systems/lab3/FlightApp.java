@@ -13,6 +13,7 @@ public class FlightApp {
         JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
         JavaPairRDD<String, Long> wordsWithCount = airportFile.mapToPair(
                 s -> {
+                    System.out.println("AAAAA");
                     System.out.println(s);
                     return new Tuple2<>(s, 1l);
                 }
