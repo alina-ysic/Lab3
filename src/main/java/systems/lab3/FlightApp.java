@@ -38,7 +38,7 @@ public class FlightApp {
                 }
         );
         airportsWithInfo.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
-        airportsWithInfo.reduce((a, b) => {
+        airportsWithInfo.reduceByKey(())
 
         })
     }
