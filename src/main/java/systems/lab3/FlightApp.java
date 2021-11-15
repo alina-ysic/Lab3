@@ -39,7 +39,7 @@ public class FlightApp {
         );
         airportsWithInfo.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
         airportsWithInfo.reduceByKey((x, y) -> {
-            if 
+            return new FlightSerializable(Math.max(x.getLateTime(),y.getLateTime()));
         });
 
     }
