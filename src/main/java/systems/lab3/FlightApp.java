@@ -17,14 +17,13 @@ public class FlightApp {
         /*JavaRDD<String> splitted = airportFile.flatMap(
                 s -> Arrays.stream(s.split(" ")).iterator()
         );*/
-        /*JavaPairRDD<String, Long> wordsWithCount = splitted.mapToPair(
+        JavaPairRDD<String, Long> wordsWithCount = airportFile.mapToPair(
                 s -> {
                     System.out.println("AAAAA");
                     System.out.println(s);
-                    s.saveAsTextFile("alicia.txt");
 
                     return new Tuple2<>(s, 1l);
                 }
-        );*/
+        );
     }
 }
