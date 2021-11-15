@@ -28,7 +28,7 @@ public class FlightApp {
                     if (Objects.equals(flightInfo[0], "YEAR")) return null;
                     int outAirportId = Integer.parseInt(flightInfo[OUT_CODE_POS]);
                     int inAirportId = Integer.parseInt(flightInfo[IN_CODE_POS]);
-                    float delay = Float.parseFloat(flightInfo[DELAY_POS]);
+                    float delay = (flightInfo[DELAY_POS].isEmpty()) ? 0 : Float.parseFloat(flightInfo[DELAY_POS]);
                     boolean cancelled = Boolean.getBoolean(flightInfo[CANCELLED_POS]);
 
                     return new Tuple2<>(new Tuple2(outAirportId, inAirportId), new FlightSerializable(delay, cancelled));
