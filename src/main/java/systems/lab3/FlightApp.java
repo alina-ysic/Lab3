@@ -37,14 +37,13 @@ public class FlightApp {
                     return new Tuple2<>(new Tuple2(outAirportId, inAirportId), new FlightsSerializable(delay, cancelled, 1));
                 }
         );
-        airportsWithInfo.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
-        airportsWithInfo.reduceByKey((x, y) -> {
+        JavaPairRDD<Tuple2, FlightsSerializable> result = airportsWithInfo.reduceByKey((x, y) -> {
             float maxDelay = Math.max(x.getDelay(), y.getDelay());
             int count = x.getCount() + y.getCount();
             float cancelledPercent = (x.getCancelledPercent() * x.getCount() + y.getCancelledPercent() * y.getCount()) / count;
             float latePercent = (x.getLatePercent() * x.getCount() + y.getLatePercent() * y.getCount()) / count;
-            return new FlightsSerializable(maxDelay, cancelledPercent, latePercent);
+            return new FlightsSerializable(maxDelay, cancelledPercent, latePercent, count);
         });
-
+        result.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
     }
 }

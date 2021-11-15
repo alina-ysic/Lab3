@@ -33,6 +33,13 @@ public class FlightsSerializable implements Serializable {
         this.count = count;
     }
 
+    public FlightsSerializable(float delay, float cancelledPercent, float latePercent, int count) {
+        this.delay = delay;
+        this.latePercent = latePercent;
+        this.cancelledPercent = cancelledPercent;
+        this.count = count;
+    }
+
     @Override
     public String toString() {
         return "FlightSerializable{" +
