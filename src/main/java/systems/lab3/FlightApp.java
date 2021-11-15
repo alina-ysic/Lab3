@@ -70,7 +70,7 @@ public class FlightApp {
         final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportNames);
 
         result.map(s -> {
-            s.set
+            s._1
         })
     }
 }

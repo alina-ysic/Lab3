@@ -4,8 +4,6 @@ package systems.lab3;
 import java.io.Serializable;
 
 public class FlightsSerializable implements Serializable {
-    private String nameInAirport;
-    private String nameOutAirport;
     private float delay;
     private float latePercent;
     private float cancelledPercent;
@@ -40,14 +38,6 @@ public class FlightsSerializable implements Serializable {
         this.latePercent = latePercent;
         this.cancelledPercent = cancelledPercent;
         this.count = count;
-    }
-
-    public void setNameInAirport(String nameInAirport) {
-        this.nameInAirport = nameInAirport;
-    }
-
-    public void setNameOutAirport(String nameOutAirport) {
-        this.nameOutAirport = nameOutAirport;
     }
 
     @Override
