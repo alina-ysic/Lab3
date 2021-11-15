@@ -70,7 +70,8 @@ public class FlightApp {
         final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportNames);
 
         result.map(s -> {
-            s._1
+            String nameInAirport =  
+            new Tuple2<String, String>()
         })
     }
 }
