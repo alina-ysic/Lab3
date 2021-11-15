@@ -69,6 +69,8 @@ public class FlightApp {
 
         final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportNames);
 
-        result.map(())
+        result.map(s -> {
+            s.set
+        })
     }
 }
