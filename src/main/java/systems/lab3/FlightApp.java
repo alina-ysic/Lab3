@@ -26,7 +26,7 @@ public class FlightApp {
             String[] flightInfo = s.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
             return !Objects.equals(flightInfo[0], "YEAR");
         });
-        JavaPairRDD<Tuple2, FlightSerializable> wordsWithCount = airportFile.mapToPair(
+        JavaPairRDD<Tuple2, FlightSerializable> airportsWithInfo = airportFile.mapToPair(
                 value -> {
                     String[] flightInfo = value.replace(DELIMITER_QUOTE, "").split(DELIMITER_COMMA);
                     int outAirportId = Integer.parseInt(flightInfo[OUT_CODE_POS]);
@@ -37,6 +37,7 @@ public class FlightApp {
                     return new Tuple2<>(new Tuple2(outAirportId, inAirportId), new FlightSerializable(delay, cancelled));
                 }
         );
-        wordsWithCount.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
+        airportsWithInfo.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
+        airportsWithInfo.reduce()
     }
 }
