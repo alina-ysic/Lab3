@@ -72,7 +72,7 @@ public class FlightApp {
         JavaRDD<String> res = result.map(s -> {
             String nameOutAirport = airportsBroadcasted.value().get(s._1._1);
             String nameInAirport = airportsBroadcasted.value().get(s._1._2);
-            String info = String.format("Аэропорт вылета: %s, аэропорт прилёта: %s, макс.задержка: %f, среднее задержанных: %f\\%, среднее отмененных: %f\\%",
+            String info = String.format("Аэропорт вылета: %s, аэропорт прилёта: %s, макс.задержка: %f, среднее задержанных: %f%%, среднее отмененных: %f%%",
             nameOutAirport, nameInAirport, s._2.getDelay(), s._2.getLatePercent(), s._2.getCancelledPercent());
             return info;
         });
