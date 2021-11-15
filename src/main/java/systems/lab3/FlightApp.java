@@ -12,7 +12,11 @@ public class FlightApp {
         JavaSparkContext sc = new JavaSparkContext(conf);
         JavaRDD<String> airportFile = sc.textFile("L_AIRPORT_ID.csv");
         JavaPairRDD<Tuple2, FlightSerializable> wordsWithCount = airportFile.mapToPair(
-                s -> new Tuple2<>(s, 1l)
+                s -> {
+
+
+                    return null;
+                }
         );
         wordsWithCount.collect().forEach(t -> System.out.println("Key:" + t._1() + " Value:" + t._2()));
     }
