@@ -69,9 +69,14 @@ public class FlightApp {
 
         final Broadcast<Map<Integer, String>> airportsBroadcasted = sc.broadcast(airportNames);
 
-        result.map(s -> {
-            String nameInAirport =  
-            new Tuple2<String, String>()
-        })
+        JavaRDD res = result.map(s -> {
+            String nameOutAirport = airportsBroadcasted.value().get(s._1);
+            String nameInAirport = airportsBroadcasted.value().get(s._2);
+            return new Tuple2<Tuple2, FlightsSerializable>(new Tuple2<String, String>(nameOutAirport, nameInAirport), s._2);
+        });
+
+
+
+
     }
 }
